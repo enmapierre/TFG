@@ -1,0 +1,59 @@
+
+<nav class="top-0 z-50 sticky bg-white shadow-sm py-4">
+    <div class="flex justify-between items-center mx-auto px-4 container">
+      <div class="flex items-center space-x-6">
+        <a href="/" class="font-medium text-gray-700 hover:text-gray-900">SHOP</a>
+        <a href="/blog" class="font-medium text-gray-700 hover:text-gray-900">BLOG</a>
+      </div>
+      
+      <a href="/" class="left-1/2 absolute -translate-x-1/2 transform">
+        <h1 class="font-serif font-medium text-xl md:text-2xl tracking-wide">SARA JOYAS</h1>
+      </a>
+      
+      <div class="flex items-center space-x-4">
+        <a href="/about" class="hidden sm:block font-medium text-gray-700 hover:text-gray-900">ABOUT</a>
+        <button class="text-gray-700 hover:text-gray-900">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </button>
+        <a href="/account" class="text-gray-700 hover:text-gray-900">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+          </svg>
+        </a>
+        <a href="/cart" class="relative text-gray-700 hover:text-gray-900">
+          <span class="-top-2 -right-2 absolute flex justify-center items-center bg-fss-blue rounded-full w-4 h-4 text-white text-xs">0</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+          </svg>
+        </a>
+      </div>
+    </div>
+    
+    <!-- Boton movil menu -->
+    <div class="sm:hidden mt-2 px-4">
+      <button id="mobile-menu-button" class="focus:outline-none text-gray-700 hover:text-gray-900">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+      
+      <!-- Menu movil-->
+      <div id="mobile-menu" class="hidden mt-2 py-2">
+        <a href="/about" class="block py-2 text-gray-700 hover:text-gray-900">ABOUT</a>
+      </div>
+    </div>
+  </nav>
+  
+  <script>
+    // Toggle mobile menu
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    if (mobileMenuButton && mobileMenu) {
+      mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+    }
+  </script>
