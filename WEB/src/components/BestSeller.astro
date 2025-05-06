@@ -1,0 +1,71 @@
+---
+import ProductCard from './ProductCard.astro';
+
+const products = [
+  {
+    image: "/pendientes_oro1.jpg",
+    title: "Pendientes Oro 1",
+    description: "Pendientes de oro....",
+    price: "100€",
+  },
+  {
+    image: "/pendientes_oro2.jpg",
+    title: "Pendientes Oro 2",
+    description: "Pendientes de oro....",
+    price: "150€",
+  },
+  {
+    image: "/pendientes_oro3.jpg",
+    title: "Pendeintes Oro 3",
+    description: "Pendientes de oro....",
+    price: "100€",
+  },
+  {
+    image: "/anillo_resina1.jpg",
+    title: "Anillo Resina",
+    description: "Anillo Resina 1",
+    price: "50€",
+  },
+  {
+    image: "/anillo_resina2.jpg",
+    title: "Anillo Resina 2",
+    description: "Anillo resina ....",
+    price: "47€",
+  },
+  {
+    image: "/anillo_oro1.jpg",
+    title: "Anillo Oro 1",
+    description: "Anillo oro.....",
+    price: "75€",
+  }
+  ,
+  {
+    image: "/anillo_oro2.jpg",
+    title: "Anillo Oro 2",
+    description: "Anillo Oro...",
+    price: "125€",
+  }
+];
+---
+
+<section class="px-4 py-12">
+  <div class="mx-auto container">
+    <h2 class="mb-8 font-serif text-2xl md:text-3xl">Bestseller</h2>
+    
+    <div class="relative">
+      <!-- Carrusel de productos -->
+      <div class="flex gap-4 -mx-4 px-4 pb-4 overflow-x-auto scroll-smooth carousel">
+        {products.map(product => (
+          <div class="flex-shrink-0 min-w-[250px] md:min-w-[280px]">
+            <ProductCard 
+              image={product.image}
+              title={product.title}
+              description={product.description}
+              price={product.price}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
