@@ -2,8 +2,34 @@
 <nav class="top-0 z-50 sticky bg-white shadow-sm py-4">
     <div class="flex justify-between items-center mx-auto px-4 container">
       <div class="flex items-center space-x-6">
-        <a href="/" class="font-medium text-gray-700 hover:text-gray-900">SHOP</a>
-        <a href="/blog" class="font-medium text-gray-700 hover:text-gray-900">BLOG</a>
+        <div class="group relative">
+          <button class="flex items-center font-medium text-gray-700 hover:text-gray-900" id="shop-menu-button">
+            SHOP
+            <svg xmlns="http://www.w3.org/2000/svg" class="ml-1 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <!--Menu desplegable -->
+          <div class="invisible group-hover:visible left-0 z-50 absolute bg-white opacity-0 group-hover:opacity-100 shadow-lg mt-2 w-64 transition-all duration-300" id="menu desplegble">
+            <div class="p-4">
+              <div class="mb-2 pb-2 border-b font-medium text-gray-800">Categorías</div>
+              <ul class="space-y-2 mb-4">
+                <li><a href="/category/oro" class="block text-gray-600 hover:text-gray-900">Oro</a></li>
+                <li><a href="/category/plata" class="block text-gray-600 hover:text-gray-900">Plata</a></li>
+                <li><a href="/category/bisuteria" class="block text-gray-600 hover:text-gray-900">Bisuteria</a></li>
+                <li><a href="/category/all" class="block text-gray-600 hover:text-gray-900">Ver todos</a></li>
+              </ul>
+              <div class="mb-2 pb-2 border-b font-medium text-gray-800">Colecciones</div>
+              <ul class="space-y-2">
+                <li><a href="/collections/spring-kiss" class="flex items-center text-fss-pink hover:text-fss-orange">
+                  Spring Kiss
+                  <span class="bg-fss-pink ml-2 px-2 py-0.5 rounded-full text-white text-xs">NUEVO</span>
+                </a></li>
+                <li><a href="/collections/bestsellers" class="block text-gray-600 hover:text-gray-900">Bestsellers</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
       
       <a href="/" class="left-1/2 absolute -translate-x-1/2 transform">
@@ -17,11 +43,6 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
         </button>
-        <a href="/account" class="text-gray-700 hover:text-gray-900">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-          </svg>
-        </a>
         <a href="/cart" class="relative text-gray-700 hover:text-gray-900">
           <span class="-top-2 -right-2 absolute flex justify-center items-center bg-fss-blue rounded-full w-4 h-4 text-white text-xs">0</span>
           <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
