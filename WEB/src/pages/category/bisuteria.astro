@@ -1,0 +1,234 @@
+---
+import Layout from '../../layouts/Main.astro';
+import ProductOCard from '../../components/ProductCard.astro';
+//import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ProductosRelacionados from '../../components/ProductosRelacionados.astro';
+
+// Definir las rutas para las migas de pan
+//const rutasBreadcrumbs = [
+ // {
+   // nombre: "Categorías",
+   // url: "/category"
+ // },
+ // {
+  //  nombre: "Oro",
+  //  url: "/category/oro"
+ // }
+//];
+
+// Datos de productos de oro
+const productsOro = [
+  {
+    id: 1,
+    title: "Anillo de Oro con Diamante",
+    price: "599.99 €",
+    description: "Elegante anillo de oro de 18k con diamante central de 0.5 quilates y acabado brillante.",
+    image: "/public/anillo_oro1.jpg"
+  },
+  {
+    id: 2,
+    title: "Cadena de Oro Eslabones",
+    price: "449.99 €",
+    description: "Cadena de oro de 18k con diseño de eslabones, disponible en 45cm y 50cm de longitud.",
+    image: "/public/anillo_oro1.jpg"
+  },
+  {
+    id: 3,
+    title: "Pulsera de Oro Tejida",
+    price: "349.99 €",
+    description: "Pulsera de oro de 14k con tejido clásico. Ajustable y resistente para uso diario.",
+    image: "/public/anillo_oro1.jpg"
+  },
+  {
+    id: 4,
+    title: "Pendientes de Oro y Perla",
+    price: "249.99 €",
+    description: "Elegantes pendientes de oro con perlas cultivadas. Cierre de presión para mayor seguridad.",
+    image: "/public/anillo_oro1.jpg"
+  }
+];
+---
+
+<Layout title="Joyas de Oro | Tu Joyería">
+  <!-- Migas de pan -->
+  <!--<Breadcrumbs rutas={rutasBreadcrumbs} /> -->
+  
+  <!-- Banner Categoría -->
+  <section class="relative h-64 overflow-hidden">
+    <img 
+      src="/images/oro/banner-oro.jpg" 
+      alt="Joyas de Oro" 
+      class="w-full h-full object-center object-cover"
+    />
+    <div class="absolute inset-0 flex flex-col justify-center items-center bg-black/30 text-center">
+      <h1 class="mb-2 font-serif text-white text-4xl">Colección de Oro</h1>
+      <p class="max-w-lg text-white">Descubre nuestras piezas exclusivas en oro, elaboradas con los materiales más finos para momentos especiales</p>
+    </div>
+  </section>
+
+  <!-- Contenido Principal -->
+  <section class="px-4 py-12">
+    <div class="mx-auto container">
+      <!-- Filtros -->
+      <div class="bg-white shadow-sm mb-8 p-6 border border-gray-100 rounded-md">
+        <div class="flex md:flex-row flex-col justify-between md:items-end gap-4">
+          <div>
+            <h2 class="mb-1 font-serif text-2xl">Productos de Oro</h2>
+            <p class="text-gray-600 text-sm">Mostrando todos los productos</p>
+          </div>
+          <div class="flex sm:flex-row flex-col gap-4">
+            <div>
+              <label for="filtroNombre" class="block mb-1 text-gray-600 text-sm">Buscar</label>
+              <input 
+                type="text" 
+                id="filtroNombre"
+                class="p-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-amber-500 w-full text-sm"
+                placeholder="Buscar productos..."
+              >
+            </div>
+            <div>
+              <label for="filtroPrecio" class="block mb-1 text-gray-600 text-sm">Ordenar por</label>
+              <select 
+                id="filtroPrecio" 
+                class="p-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-amber-500 w-full text-sm"
+              >
+                <option value="relevancia">Relevancia</option>
+                <option value="precioAsc">Precio: menor a mayor</option>
+                <option value="precioDesc">Precio: mayor a menor</option>
+                <option value="nombreAsc">Nombre: A-Z</option>
+                <option value="nombreDesc">Nombre: Z-A</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Products Grid -->
+      <div class="gap-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" id="productsContainer">
+        {productsOro.map((producto) => (
+          <ProductOCard
+            image={producto.image}
+            title={producto.title}
+            description={producto.description}
+            price={producto.price}
+          />
+        ))}
+      </div>
+
+      <!-- Mensaje sin resultados -->
+      <div id="sinResultados" class="hidden py-16 text-center">
+        <p class="text-gray-600">No se encontraron productos que coincidan con tu búsqueda.</p>
+        <button id="resetFiltros" class="mt-4 font-medium text-amber-600 hover:text-amber-700">
+          Restablecer filtros
+        </button>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Productos Relacionados -->
+<ProductosRelacionados 
+  titulo="También podría interesarte" 
+  productos={productsOro.map(p => ({
+    id: p.id,
+    title: p.title,
+    price: p.price,
+    description: p.description,
+    image: p.image
+  }))} 
+/>
+</Layout>
+
+<style>
+  @keyframes fadeInOut {
+    0% { opacity: 0; transform: translateY(20px); }
+    10% { opacity: 1; transform: translateY(0); }
+    90% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(20px); }
+  }
+  
+  .animate-fade-in-out {
+    animation: fadeInOut 3s ease-in-out forwards;
+  }
+</style>
+
+<script>
+  // Script para filtrado y ordenación de productos
+  document.addEventListener('DOMContentLoaded', () => {
+    const productosContainer = document.getElementById('productsContainer');
+    const productosItems = Array.from(productosContainer.children);
+    const sinResultados = document.getElementById('sinResultados');
+    const filtroNombre = document.getElementById('filtroNombre');
+    const filtroPrecio = document.getElementById('filtroPrecio');
+    const resetFiltros = document.getElementById('resetFiltros');
+    
+    function filtrarYOrdenarProductos() {
+      const terminoBusqueda = filtroNombre.value.toLowerCase();
+      const opcionOrden = filtroPrecio.value;
+      let productosVisibles = 0;
+      
+      productosItems.forEach(item => {
+        const nombre = item.querySelector('h3').textContent.toLowerCase();
+        const visible = nombre.includes(terminoBusqueda);
+        
+        if (visible) {
+          item.style.display = '';
+          productosVisibles++;
+        } else {
+          item.style.display = 'none';
+        }
+      });
+      
+      sinResultados.classList.toggle('hidden', productosVisibles > 0);
+      
+      if (opcionOrden !== 'relevancia') {
+        const productosArray = productosItems.filter(item => 
+          item.style.display !== 'none'
+        );
+        
+        productosArray.sort((a, b) => {
+          const nombreA = a.querySelector('h3').textContent;
+          const nombreB = b.querySelector('h3').textContent;
+          const precioA = parseFloat(a.querySelector('p:last-child').textContent);
+          const precioB = parseFloat(b.querySelector('p:last-child').textContent);
+          
+          switch(opcionOrden) {
+            case 'precioAsc': return precioA - precioB;
+            case 'precioDesc': return precioB - precioA;
+            case 'nombreAsc': return nombreA.localeCompare(nombreB);
+            case 'nombreDesc': return nombreB.localeCompare(nombreA);
+            default: return 0;
+          }
+        });
+        
+        productosArray.forEach(item => productosContainer.appendChild(item));
+      }
+    }
+    
+    // Event listeners
+    filtroNombre.addEventListener('input', filtrarYOrdenarProductos);
+    filtroPrecio.addEventListener('change', filtrarYOrdenarProductos);
+    
+    resetFiltros.addEventListener('click', () => {
+      filtroNombre.value = '';
+      filtroPrecio.value = 'relevancia';
+      productosItems.forEach(item => item.style.display = '');
+      sinResultados.classList.add('hidden');
+    });
+    
+    // Añadir al carrito
+    const botonesCarrito = document.querySelectorAll('.product-card');
+    botonesCarrito.forEach(boton => {
+      boton.addEventListener('click', (e) => {
+        const title = boton.querySelector('h3').textContent;
+        console.log(`Producto ${title} añadido al carrito`);
+        
+        const notificacion = document.createElement('div');
+        notificacion.className = 'fixed bottom-4 right-4 bg-green-600 text-white px-4 py-2 rounded-md shadow-lg z-50 animate-fade-in-out';
+        notificacion.textContent = '¡Producto añadido al carrito!';
+        document.body.appendChild(notificacion);
+        
+        setTimeout(() => notificacion.remove(), 3000);
+      });
+    });
+  });
+</script>
