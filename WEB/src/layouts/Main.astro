@@ -1,5 +1,4 @@
 ---
-import '../styles/global.css';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 
@@ -30,7 +29,6 @@ const { title } = Astro.props;
     <Footer />
     
     <script>
-      // Inicialización global del carrito
       if (!window.cart) {
         window.cart = {
           items: JSON.parse(localStorage.getItem('cart')) || [],
@@ -47,7 +45,6 @@ const { title } = Astro.props;
     <script type="module" src="/scripts/cart.js"></script>
     
     <script>
-      // Script para el funcionamiento de los carruseles
       document.addEventListener('astro:page-load', () => {
         const carousels = document.querySelectorAll('.carousel');
         

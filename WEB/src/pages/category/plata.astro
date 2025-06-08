@@ -1,156 +1,41 @@
 ---
 import Layout from '../../layouts/Main.astro';
-import ProductOCard from '../../components/ProductCard.astro';
-//import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ProductCard from '../../components/ProductCard.astro';
 import ProductosRelacionados from '../../components/ProductosRelacionados.astro';
 
-// Definir las rutas para las migas de pan
-//const rutasBreadcrumbs = [
- // {
-   // nombre: "Categorías",
-   // url: "/category"
- // },
- // {
-  //  nombre: "Oro",
-  //  url: "/category/oro"
- // }
-//];
 
-// Datos de productos de oro
-const productsOro = [
-  {
-    id: 1,
-    title: "Anillo de Oro con Diamante",
-    price: "599.99 €",
-    description: "Elegante anillo de oro de 18k con diamante central de 0.5 quilates y acabado brillante.",
-    image: "/public/imagenes/plata/anillo_p1.jpg"
-  },
-  {
-    id: 2,
-    title: "Cadena de Oro Eslabones",
-    price: "449.99 €",
-    description: "Cadena de oro de 18k con diseño de eslabones, disponible en 45cm y 50cm de longitud.",
-    image: "/public/imagenes/plata/anillo_p2.jpg"
-  },
-  {
-    id: 3,
-    title: "Pulsera de Oro Tejida",
-    price: "349.99 €",
-    description: "Pulsera de oro de 14k con tejido clásico. Ajustable y resistente para uso diario.",
-    image: "/public/imagenes/plata/anillo_p3.jpg"
-  },
-  {
-    id: 4,
-    title: "Pendientes de Oro y Perla",
-    price: "249.99 €",
-    description: "Elegantes pendientes de oro con perlas cultivadas. Cierre de presión para mayor seguridad.",
-    image: "/public/imagenes/plata/anillo_p4.jpg"
-  },
-  {
-    id: 5,
-    title: "Pendientes de Oro y Perla",
-    price: "249.99 €",
-    description: "Elegantes pendientes de oro con perlas cultivadas. Cierre de presión para mayor seguridad.",
-    image: "/public/imagenes/plata/anillo_p5.jpg"
-  },
-  {
-    id: 6,
-    title: "Pendientes de Oro y Perla",
-    price: "249.99 €",
-    description: "Elegantes pendientes de oro con perlas cultivadas. Cierre de presión para mayor seguridad.",
-    image: "/public/imagenes/plata/anillo_p6.jpg"
-  },
-  {
-    id: 7,
-    title: "Pendientes de Oro y Perla",
-    price: "249.99 €",
-    description: "Elegantes pendientes de oro con perlas cultivadas. Cierre de presión para mayor seguridad.",
-    image: "/public/imagenes/plata/pendiente_p1 .jpg"
-  },
-  {
-    id: 8,
-    title: "Pendientes de Oro y Perla",
-    price: "249.99 €",
-    description: "Elegantes pendientes de oro con perlas cultivadas. Cierre de presión para mayor seguridad.",
-    image: "/public/imagenes/plata/pendiente_p2.jpg"
-  },
-  {
-    id: 9,
-    title: "Pendientes de Oro y Perla",
-    price: "249.99 €",
-    description: "Elegantes pendientes de oro con perlas cultivadas. Cierre de presión para mayor seguridad.",
-    image: "/public/imagenes/plata/pendiente_p3.jpg"
-  }
-];
+const products = await fetch ("http://localhost:8080/productos/plata")//ir cambiando
+.then(res=>{return res.json()})
 ---
 
 <Layout title="Joyas de Oro | Tu Joyería">
   
-  
-  <!-- Banner Categoría -->
   <section class="relative h-64 overflow-hidden">
-    <img 
-      src="/images/oro/banner-oro.jpg" 
-      alt="Joyas de Oro" 
-      class="w-full h-full object-center object-cover"
-    />
     <div class="absolute inset-0 flex flex-col justify-center items-center bg-black/30 text-center">
       <h1 class="mb-2 font-serif text-white text-4xl">Colección de Plata</h1>
       <p class="max-w-lg text-white">Descubre nuestras piezas exclusivas en plata, elaboradas con los materiales más finos para momentos especiales</p>
     </div>
   </section>
 
-  <!-- Contenido Principal -->
   <section class="px-4 py-12">
     <div class="mx-auto container">
-
-      <!-- Products Grid -->
       <div class="gap-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" id="productsContainer">
-        {productsOro.map((producto) => (
-          <ProductOCard
-            image={producto.image}
-            title={producto.title}
-            description={producto.description}
-            price={producto.price}
-          />
+        {products.map((product) => (
+          <ProductCard 
+              id={product.id}
+              image={product.image}
+              title={product.title}
+              description={product.description}
+              price={product.price}
+            />
         ))}
       </div>
 
-      <!-- Mensaje sin resultados -->
-      <div id="sinResultados" class="hidden py-16 text-center">
-        <p class="text-gray-600">No se encontraron productos que coincidan con tu búsqueda.</p>
-        <button id="resetFiltros" class="mt-4 font-medium text-amber-600 hover:text-amber-700">
-          Restablecer filtros
-        </button>
-      </div>
-    </div>
   </section>
   
-  <!-- Productos Relacionados -->
-<ProductosRelacionados 
-  titulo="También podría interesarte" 
-  productos={productsOro.map(p => ({
-    id: p.id,
-    title: p.title,
-    price: p.price,
-    description: p.description,
-    image: p.image
-  }))} 
-/>
+
 </Layout>
 
-<style>
-  @keyframes fadeInOut {
-    0% { opacity: 0; transform: translateY(20px); }
-    10% { opacity: 1; transform: translateY(0); }
-    90% { opacity: 1; transform: translateY(0); }
-    100% { opacity: 0; transform: translateY(20px); }
-  }
-  
-  .animate-fade-in-out {
-    animation: fadeInOut 3s ease-in-out forwards;
-  }
-</style>
 
 <script>
   // Script para filtrado y ordenación de productos
