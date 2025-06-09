@@ -2,21 +2,18 @@
 import Layout from '../../layouts/Main.astro';
 import ProductCard from '../../components/ProductCard.astro';
 
-
 // Datos de productos de oro
-const products = await fetch ("http://localhost:8080/productos/plata")//ir cambiando
+const products = await fetch ("http://localhost:8080/productos/summer")
 .then(res=>{return res.json()})
 ---
 
 <Layout title="Joyas de Oro | Tu Joyería">
   
-  
-  <!-- Banner Categoría -->
   <section class="relative h-64 overflow-hidden">
   
-    <div class="absolute inset-0 flex flex-col justify-center items-center bg-black/30 text-center">
-      <h1 class="mb-2 font-serif text-white text-4xl">Colección de Plata</h1>
-      <p class="max-w-lg text-white">Descubre nuestras piezas exclusivas en plata, elaboradas con los materiales más finos para momentos especiales</p>
+    <div class="absolute inset-0 flex flex-col justify-center items-center bg-cyan-800 text-center">
+      <h1 class="mb-2 font-serif text-white text-4xl">Summer Kiss</h1>
+      <p class="max-w-lg text-white">Descubre nuestras nueva coleccion para el verano con tematica maritima y de la mejor calidad.</p>
     </div>
   </section>
 
