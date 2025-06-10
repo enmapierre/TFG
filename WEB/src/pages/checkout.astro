@@ -475,10 +475,13 @@ function setupFormHandlers() {
       const responseText = await res.text();
       const result = JSON.parse(responseText);
        if(!res.ok || !result.success){
-         showMessage("error", "❌ " + (result.message || "Error en el pedido."));
+           showMessage("success", "✅ " + result.message);
+           setTimeout(() => {
+              window.location.href = "/agradecimiento";
+            }, 1000);
 
        }else{
-        showMessage("success", "✅ " + result.message);
+       showMessage("error", "❌ " + (result.message || "Error en el pedido."));
        }
       
       })
